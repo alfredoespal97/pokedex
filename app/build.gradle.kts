@@ -8,37 +8,25 @@ plugins {
 
 android {
     namespace = "com.alma.pokedex"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.alma.pokedex"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += "room.incremental" to "true"
-            }
-        }
     }
 
     buildTypes {
-        getByName("debug") {
+        release {
             isMinifyEnabled = false
-            isTestCoverageEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            testProguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro")
-        }
-
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            testProguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -50,13 +38,31 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
+    buildToolsVersion = "36.0.0"
+    ndkVersion = "29.0.13113456 rc1"
 
+    packagingOptions {
+        resources.excludes.add("META-INF/DEPENDENCIES")
+        resources.excludes.add("META-INF/LICENSE")
+        resources.excludes.add("META-INF/LICENSE.txt")
+        resources.excludes.add("META-INF/license.txt")
+        resources.excludes.add("META-INF/NOTICE")
+        resources.excludes.add("META-INF/NOTICE.txt")
+        resources.excludes.add("META-INF/notice.txt")
+        resources.excludes.add("META-INF/ASL2.0")
+        resources.excludes.add("META-INF/*.kotlin_module") // Common for Kotlin projects
+        // Add specific paths to your duplicate files here
+        // For example:
+        // resources.excludes.add("path/to/your/duplicate/file.extension")
+    }
 }
 
 dependencies {
+
     // App dependencies
-    implementation(libs.androidx.annotation)
+    //implementation(libs.androidx.annotation)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.timber)
     implementation(libs.androidx.test.espresso.idling.resources)
@@ -64,6 +70,7 @@ dependencies {
     // Architecture Components
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.room.compiler.processing.testing)
     ksp(libs.room.compiler)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
@@ -122,14 +129,12 @@ dependencies {
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
 
+    // Gson - Retrofit
+    implementation(libs.gson)
     implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+    implementation(libs.converter.gson) //
 
+    // Coil
     implementation(libs.coil.kt.compose)
-    implementation(libs.coil.kt)
-
-    implementation(libs.room.runtime)
-    ksp(libs.room.compiler)
 
 }
-
