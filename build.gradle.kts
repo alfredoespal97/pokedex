@@ -7,4 +7,3 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
 }
-val sourceCompatibility by extra(JavaVersion.VERSION_17)
