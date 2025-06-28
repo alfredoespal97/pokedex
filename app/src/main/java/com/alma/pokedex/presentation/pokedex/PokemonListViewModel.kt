@@ -2,7 +2,7 @@ package com.alma.pokedex.presentation.pokedex
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.compiler.processing.util.Resource
+//import androidx.room.compiler.processing.util.Resource
 import com.alma.pokedex.domain.usecase.GetPokemonListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
