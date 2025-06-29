@@ -52,7 +52,7 @@ fun PokemonListScreen(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onPokemonClick(pokemon.name) },
+                        .clickable { pokemon.name?.let { onPokemonClick(it) } },
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Column(
@@ -66,7 +66,8 @@ fun PokemonListScreen(
                             modifier = Modifier.size(100.dp)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = pokemon.name.replaceFirstChar { it.uppercase() }, style = MaterialTheme.typography.bodyLarge)
+                        pokemon.name?.replaceFirstChar { it.uppercase() }
+                            ?.let { Text(text = it, style = MaterialTheme.typography.bodyLarge) }
                     }
                 }
             }

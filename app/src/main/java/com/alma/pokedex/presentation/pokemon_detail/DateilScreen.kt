@@ -10,17 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonDetailScreen(
+fun PokemonDetailScreen2(
     pokemonName: String,
     onBackClick: () -> Unit, // Manteniendo onBackClick como lo tenías
     viewModel: PokemonDetailViewModel = hiltViewModel()
@@ -154,49 +151,6 @@ fun PokemonDetailScreen(
                                     }
                                 }
                             }
-
-
-                            // --- Sección de Formas ---
-                            pokemon.forms?.takeIf { it.isNotEmpty() }?.let { forms ->
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Text(
-                                    text = "Formas",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    textAlign = TextAlign.Center
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                                forms.forEach { form ->
-                                    form.name?.let { formName ->
-                                        Text(
-                                            text = "- ${formName}",
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, bottom = 4.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            // --- Sección de Estadísticas ---
-                            pokemon.stats?.takeIf { it.isNotEmpty() }?.let { stats ->
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Text(
-                                    text = "Estadísticas Base",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    textAlign = TextAlign.Center
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                                stats.forEach { statItem ->
-                                    val statName = statItem.stat?.name ?: "N/A"
-                                    val baseStat = statItem.baseStat
-                                    DetailItem(label = statName, value = baseStat.toString())
-                                }
-                            }
-
-
                         }
                     }
                 }
@@ -213,30 +167,3 @@ fun PokemonDetailScreen(
         }
     }
 }
-
-
-// Helper composable para ítems de detalle (Label: Value)
-@Composable
-fun DetailItem(label: String, value: String, modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "$label:",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.weight(1f) // El label toma espacio disponible
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.End,
-            modifier = Modifier.weight(1f) // El valor toma espacio disponible y se alinea al final
-        )
-    }
-}
-
-
