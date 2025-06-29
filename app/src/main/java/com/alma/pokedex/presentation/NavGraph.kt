@@ -28,7 +28,7 @@ fun NavGraph() {
             arguments = listOf(navArgument("pokemonName") { type = NavType.StringType })
         ) { backStackEntry ->
             val name = backStackEntry.arguments?.getString("pokemonName") ?: return@composable
-            PokemonDetailScreen(pokemonName = name)
+            PokemonDetailScreen(pokemonName = name, onBackClick = { navController.popBackStack() })
         }
     }
 }
