@@ -122,12 +122,15 @@ dependencies {
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
 
+    // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    //Coil
     implementation(libs.coil.kt.compose)
     implementation(libs.coil.kt)
 
+    //Room
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
 
