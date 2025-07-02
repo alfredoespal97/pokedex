@@ -101,5 +101,5 @@ data class DreamWorld(val frontDefault: String? = null, val frontFemale: Any? = 
 
 /* ---------- Stats & Types ---------- */
 
-data class Stat(val baseStat: Int? = null, val effort: Long? = null, val stat: Species? = null)
+data class Stat(val base_stat: Int? = null, val effort: Long? = null, val stat: Species? = null)
 data class Type(val slot: Long? = null, val type: Species? = null)

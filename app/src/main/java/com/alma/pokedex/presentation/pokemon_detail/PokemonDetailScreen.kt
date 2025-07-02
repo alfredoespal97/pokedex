@@ -191,7 +191,7 @@ fun PokemonDetailScreen(
                                 Spacer(modifier = Modifier.height(8.dp))
                                 stats.forEach { statItem ->
                                     val statName = statItem.stat?.name ?: "N/A"
-                                    val baseStat = statItem.baseStat
+                                    val baseStat = statItem.base_stat
                                     DetailItem(label = statName, value = baseStat.toString())
                                 }
                             }
